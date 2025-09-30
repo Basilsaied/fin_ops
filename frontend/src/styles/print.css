@@ -1,0 +1,102 @@
+/* Print-specific styles */
+@media print {
+  /* Hide everything by default */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Show only the printable report */
+  .print\:block,
+  .print\:block * {
+    visibility: visible;
+  }
+
+  /* Position the printable report */
+  .print\:block {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  /* Remove shadows and borders for print */
+  .shadow,
+  .shadow-lg,
+  .border,
+  .border-gray-200,
+  .border-gray-300 {
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  /* Ensure proper page breaks */
+  .page-break {
+    page-break-before: always;
+  }
+
+  .page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+
+  /* Optimize table printing */
+  table {
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+
+  /* Adjust font sizes for print */
+  .text-3xl {
+    font-size: 1.875rem !important;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem !important;
+  }
+
+  .text-xl {
+    font-size: 1.25rem !important;
+  }
+
+  /* Ensure proper margins */
+  @page {
+    margin: 1in;
+  }
+
+  /* Remove background colors for better printing */
+  .bg-gray-50,
+  .bg-blue-50,
+  .bg-green-50,
+  .bg-red-50,
+  .bg-yellow-50,
+  .bg-purple-50,
+  .bg-orange-50 {
+    background-color: transparent !important;
+  }
+
+  /* Ensure text is black for printing */
+  .text-gray-600,
+  .text-gray-700,
+  .text-gray-800,
+  .text-gray-900 {
+    color: #000 !important;
+  }
+
+  /* Hide interactive elements */
+  button,
+  .hover\:bg-gray-50,
+  .focus\:ring-2 {
+    display: none !important;
+  }
+}

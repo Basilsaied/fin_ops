@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ExpenseCategory {
+  SALARIES                      @map("Salaries")
+  SOFTWARE_TOOLS               @map("Software & Tools")
+  INFRASTRUCTURE_HOSTING       @map("Infrastructure & Hosting")
+  HARDWARE_EQUIPMENT           @map("Hardware & Equipment")
+  SECURITY_COMPLIANCE          @map("Security & Compliance")
+  OPERATIONAL_ADMINISTRATIVE   @map("Operational & Administrative")
+  CONTINUOUS_LEARNING_RD       @map("Continuous Learning & R&D")
+}
+
+model Cost {
+  id        Int             @id @default(autoincrement())
+  category  ExpenseCategory
+  amount    Decimal         @db.Decimal(12, 2)
+  month     Int             @db.SmallInt
+  year      Int             @db.SmallInt
+  createdAt DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([category, month, year])
+  // Optimized indexes for frequently queried columns
+  @@index([year, month], name: "idx_costs_year_month")
+  @@index([category], name: "idx_costs_category")
+  @@index([createdAt], name: "idx_costs_created_at")
+  @@index([updatedAt], name: "idx_costs_updated_at")
+  // Composite index for trend queries
+  @@index([year, month, category], name: "idx_costs_year_month_category")
+  // Index for amount-based queries (filtering by amount ranges)
+  @@index([amount], name: "idx_costs_amount")
+  // Composite index for date range queries
+  @@index([year, category], name: "idx_costs_year_category")
+  @@map("costs")
+}

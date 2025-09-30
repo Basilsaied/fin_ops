@@ -1,0 +1,22 @@
+[
+  {
+    "month": 1,
+    "year": 2024,
+    "totalAmount": 53700,
+    "categoryBreakdown": [
+      { "category": "Salaries", "amount": 50000 },
+      { "category": "Software & Tools", "amount": 2500 },
+      { "category": "Infrastructure & Hosting", "amount": 1200 }
+    ]
+  },
+  {
+    "month": 2,
+    "year": 2024,
+    "totalAmount": 55300,
+    "categoryBreakdown": [
+      { "category": "Salaries", "amount": 52000 },
+      { "category": "Software & Tools", "amount": 2300 },
+      { "category": "Infrastructure & Hosting", "amount": 1000 }
+    ]
+  }
+]
